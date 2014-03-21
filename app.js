@@ -6,11 +6,12 @@
 var express = require('express')
   , mongoose = require('mongoose')
   , routes = require('./routes')
-  , urls = require('./routes/urls')
-  , http = require('http')
+  , urls = require('./routes/urls')(mongoose)
   , path = require('path');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost/cpl');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -29,10 +30,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.get('/:token', urls.find);
 app.get('/', routes.index);
 
 app.post('/api/urls', urls.create);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
+app.listen(3000);

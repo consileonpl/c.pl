@@ -7,7 +7,7 @@ angular.module('c.pl', [])
     $http.post('/api/urls', $scope.formData)
       .success(function(data) {
         $scope.formData = {}
-        $scope.shortUrl = data.shortUrl;
+        $scope.token = data.token;
       })
       .error(function(data) {
         console.log('Error: ' + data);

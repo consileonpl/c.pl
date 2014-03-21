@@ -11,5 +11,6 @@ block content
 
           button(type='submit' class='btn btn-primary')= 'Shorten URL'
 
-      div(id='short-url' class='col-md-5' ng-show='shortUrl != null')
-        div(class='well')= "{{ shortUrl }}"
+      div(id='short-url' class='col-md-5' ng-show='token != null')
+        div(class='well')
+          a(href= "http://c.pl:3000/{{ token }}")= "http://c.pl/{{ token }}"
