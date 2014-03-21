@@ -4,8 +4,9 @@
  */
 
 var express = require('express')
+  , mongoose = require('mongoose')
   , routes = require('./routes')
-  , user = require('./routes/user')
+  , urls = require('./routes/urls')
   , http = require('http')
   , path = require('path');
 
@@ -29,7 +30,8 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+
+app.post('/api/urls', urls.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
